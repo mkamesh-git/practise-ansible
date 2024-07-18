@@ -1,0 +1,23 @@
+---
+- name: Start an instance with a public IP address
+  hosts: localhost
+  connection: local
+
+  tasks:
+    - name: Start an instance with a public IP address
+      amazon.aws.ec2_instance:
+        name: "public-compute-instance"
+        region: "us-east-1"
+        key_name: "pro"
+        vpc_subnet_id: "subnet-0278466a9b573950f"
+        instance_type: "t2.micro"
+        security_groups: 
+          - "default"
+        aws_access_key: "{{access_key}}"  # From vault as defined
+        aws_secret_key: "{{secret_key}}"  # From vault as defined   
+        network:
+          assign_public_ip: true  # Corrected to dictionary format
+        image_id: "ami-04a81a99f5ec58529"
+        tags:
+          Environment: Testing
+      
