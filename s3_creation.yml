@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: S3 bucket creation
+      amazon.aws.s3_bucket:
+        name: devops-kamesh
+        state: present
+        region: us-east-1  # Specify your desired region
+        aws_access_key: "{{ access_key }}"
+        aws_secret_key: "{{ secret_key }}"
